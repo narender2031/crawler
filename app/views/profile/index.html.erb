@@ -1,0 +1,119 @@
+<meta name="google-signin-client_id" content="367164179713-o2vp44qfh28frcoe8mla19tm5lo7p9iq.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="viewport" content="width= device-width initail-scale=1" />
+<body class="dash-body nav-sm" id="dash">
+    <div class="container body">
+        <div class="main_container">
+            <%= render partial: "layouts/left_col", :locals => {active: "User"} %>
+            <%= render partial: "layouts/nav_bar", :locals => {active: "User"} %>
+            <div class="right_col" >
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h4 class="title_panel"> Profile Settings </h4>
+                            </div>
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <%= form_for @user, url: profile_path do |f| %>
+                                            <fieldset class="profileFieldset">
+                                              
+                                                   
+                                                    <div class="row">
+                                                        <div class="first_name">
+                                                            <%= f.text_field :first_name, class:"profileField", id:"first_name_data"%>
+                                                            <p class="errorMessage" id="fNameerror" >First name is missing </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="last_name">
+                                                            <%= f.text_field :last_name, class:"profileField", id:"last_name_data"%>
+                                                            <p class="errorMessage" id="lNameerror" >Last name is missing </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="last_name">
+                                                            <%= f.email_field :email, class:"profileField", id:"email_data"%>
+                                                            <p class="errorMessage" id="emailerror" >Email is missing </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="last_name">
+                                                            <%= f.phone_field :phone, class:"profileField", id:"phone_data", placeholder:"Phone Number"%>
+                                                            <p class="errorMessage" id="phoneerror" >Phone is missing </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="last_name">
+                                                            <%= f.submit "Update", class:"SubmitProfileUpdates", id:"SubmitProfile"%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="logout">
+                                                            <div class="hidden">
+                                                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                                                            </div>    
+                                                            <a href="http://localhost:3000/logout" onclick="signOut();" class="logoutButton">LogOut</a>
+                                                        </div>
+                                                    </div>    
+                                            </fieldset>    
+                                        <% end %>
+                                    </div>    
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script>
+ 
+       $('#SubmitProfile').on('click', function(e){
+       
+                                                                
+       var Fname =  $('#first_name_data').val();
+       if(Fname == ""){
+            e.preventDefault();
+            $('#fNameerror').css("display","block");
+            $('#fNameerror').fadeOut(3000);
+       }
+       var Lname = $('#last_name_data').val();
+       if(Lname == ""){
+            e.preventDefault();
+            $('#lNameerror').css("display","block");
+            $('#lNameerror').fadeOut(3000);
+       }
+       var emaild = $("#email_data").val();
+       if(emaild == ""){
+            e.preventDefault();
+            $('#emailerror').css("display","block");
+            $('#emailerror').fadeOut(3000);
+       }
+       var phone_data = $("#phone_data").val();
+       if(phone_data == ""){
+            e.preventDefault();
+            $('#phoneerror').css("display","block");
+            $('#phoneerror').fadeOut(3000);
+        }
+       })
+
+       function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        var g_id  = profile.getId(); 
+        var str =  profile.getName();
+        console.log('Image URL: ' + profile.getImageUrl());
+        var email =   profile.getEmail();
+    }
+  </script>
+  <script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
+    }
+  </script>
+</body>  
+ 

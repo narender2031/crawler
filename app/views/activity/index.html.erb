@@ -1,0 +1,43 @@
+<meta name="viewport" content="width= device-width initail-scale=1" />
+<body class="dash-body nav-sm" id="dash">
+    <div class="container body">
+        <div class="main_container">
+            <%= render partial: "layouts/left_col", :locals => {active: "Activity"} %>
+            <%= render partial: "layouts/nav_bar", :locals => {active: "Activity"} %>
+            <div class="right_col" >
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h4 class="title_panel"> Activity</h4>
+                            </div>
+                            <div class="x_content">
+                                <div class="data">
+                                    <% if @activity.blank? %>
+                                    <% else %>
+                                        <% @activity.each do |c| %>
+                                            <div class="row">
+                                                <div class="TimeOfCrawel">
+                                                    <h5 class="ActivityColor"><%= time_ago_in_words(c.created_at) %> ago</h5>
+                                                </div>   
+                                                <div class="url">
+                                                    <i class="fa fa-rss ActivityColor"></i>
+                                                    <p class="" style="margin-left: 33px;">
+                                                        
+                                                        <span style="word-wrap: break-word;"><a class="" style="word-wrap: break-word; color: #60bd6a;" href="<%= c.crawled_url %>"><%= c.crawled_url.to_s %></span>
+                                                    </p>
+                                                </div>
+                                            </div>    
+                                        <% end %> 
+                                    <% end %>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</body>  
+ 

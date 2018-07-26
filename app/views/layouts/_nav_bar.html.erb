@@ -1,0 +1,33 @@
+<div class="top_nav">
+    <div class="nav_menu nav-white">
+        <nav>
+            <div class="nav toggle">
+
+            </div>
+            <% if active == "Dashboard" || active == "Dashboard" %>
+                <ul class="nav navbar-nav navbar-right" id="nav-br"> 
+                    <li>
+                        <%= link_to profile_path, style:"background: none;" do %>
+                            <h5 class="username"><i class="fa fa-user" aria-hidden="true"></i> <%= @user.first_name %> <%= @user.last_name %></h5>
+                        <% end %>    
+                    </li>
+                </ul>
+            <% end %>
+            <% if active == "User" || active == "User" %>
+                <div class="row" style="margin-left: 20px;">
+                    <div class="image">
+                        <%= link_to password_path, class:"PasswordButton" do  %>
+                            Chnage Password
+                        <% end %>    
+                    </div>
+                </div> 
+            <% end %>   
+            <% if active == "Data" || active == "Data" %>
+                <p class="downCsv">
+                    Download:
+                    <%= link_to "CSV", data_path(format: "csv") %> 
+                </p> 
+            <% end %>    
+        </nav>
+    </div>
+</div>

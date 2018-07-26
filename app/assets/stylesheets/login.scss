@@ -1,0 +1,61 @@
+// Place all the styles related to the login controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.login_page{
+    background: #f4f4f4
+}
+
+.loginForm
+    {
+        border: 1px solid #60bd6a;
+        background: white;
+        padding: 20px;
+        position: relative;
+        top: 60px;
+        border-radius: 11px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+.inputField_login{
+    padding: 9px;
+    width: 100%;
+    border: 1px solid #444;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+.login_fields{
+    padding: 46px;
+    
+}
+.LoginButton{
+    padding: 6px;
+    margin-top: 20px;
+    width: 68%;
+    background: white;
+    border-radius: 5px;
+}
+.createNewAccountLink{
+    color: #60bd66
+}
+.loginNuttonSection{
+    margin-top: 20px;
+}
+.error-message{
+    display: none;
+    position: relative;
+    top: 4px;
+    color: #facdcd;
+    border: 1px solid #ed5a5a;
+    background: #ed5a5a;
+    border-radius: 7px;
+    margin-bottom: -8px;
+}
+.InavlidEmailPassword{
+    color: #facdcd;
+    border: 1px solid #ed5a5a;
+    padding: 3px;
+    border-radius: 7px;
+    background: #ed5a5a;
+}
+.brand-logo-1{
+    margin-top: -107px;
+}

@@ -1,0 +1,123 @@
+<meta name="viewport" content="width= device-width initail-scale=1" />
+<meta name="google-signin-client_id" content="367164179713-o2vp44qfh28frcoe8mla19tm5lo7p9iq.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<body class="login_page" >    
+    <div class="row login_page">
+        <div class="col-md-4 col-sm-4 col-xs-1">
+        </div>
+        <center>
+            <div class="col-md-4 col-sm-6 col-xs-10">
+                <div class="row">
+                    <div class="form loginForm">
+                        <%= form_tag login_path do %>
+                            <fieldset class="login_fields">
+                                <div class="row">
+                                    <%= image_tag "brand.png", class:"brand-logo-1"%>
+                                </div>
+                                <% flash.each do |name, msg|%>
+                                    <center> 
+                                    <div class='' id="">
+                                        <center><p class="InavlidEmailPassword"><%= msg %></p></center>
+                                    </div>
+                                    </center>
+                                <% end %>
+                                <div class="row">
+                                    <%= email_field_tag :email,  params[:email],  class:"inputField_login", placeholder:"Email", id:"loginemail", autocomplete:"off" %>
+                                    <p class="error-message" id="email"></p>
+                                </div>
+                                <div class="row">
+                                    <%= password_field_tag :password, params[:password], class:"inputField_login", id:"password_fi", placeholder:"Password",autocomplete:"off" %> 
+                                    <p class="error-message" id="password"></p>
+                                </div>
+                                <div class="row ">
+                                    <%= submit_tag "LogIn", class:"LoginButton"%>
+                                </div>
+                                <div class="row loginNuttonSection">
+                                    <p class="registerLine">Not registered?<span class="createNewAccountLink"><%= link_to register_path do %> Create an account <% end %></span></p>
+                                </div>
+                                <div class="loginWith_Google">
+                                    <div class="g-signin2" data-onsuccess="onSignIn"></div> 
+                                </div>
+                            </fieldset>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </center> 
+        <div class="col-md-4 col-sm-6 col-xs-1">
+        </div>   
+    </div>
+    
+    <script>
+    $(function(){ // jQuery dom ready event
+    if (window.location.href.toLowerCase().indexOf("loaded") < 0) {
+        window.location = window.location.href + '?loaded=1'
+    }
+});
+    $(".LoginButton").on('click', function(e){
+        var email =  $("#loginemail").val();
+        if(email == ""){
+            e.preventDefault();
+           $(".error-message").css("display", "block");
+           $("#email").text("Your Email is missing");
+           $("#email").fadeOut(4000);
+        }   
+        var password = $('#password_fi').val()
+        if(password == ""){
+             e.preventDefault();
+            $("#password").css("display", "block");
+            $("#password").text("Your Email is missing");
+            $("#password").fadeOut(4000);
+        }                            
+    })
+     $('.InavlidEmailPassword').fadeOut(5000);
+        function onSignIn(googleUser) {
+            document.location = document.location;
+        var profile = googleUser.getBasicProfile();
+        var g_id  = profile.getId(); 
+        var str =  profile.getName();
+        console.log('Image URL: ' + profile.getImageUrl());
+        var email =   profile.getEmail();
+        var id_token = googleUser.getAuthResponse().id_token;
+        var name =str.split(" ");
+            if(name.length >= 2){
+                var fname = name[0];
+                var lname = name[1]
+            }
+        
+        data = {
+            fname: fname,
+            lname: lname,
+            email: profile.getEmail(),
+            token_id: g_id
+        }
+        console.log(name.last)
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://localhost:3000/api/google_Login",
+            "method": "POST",
+            "headers": {
+            "content-type": "application/json"
+            },
+            "processData": false,
+            "data": JSON.stringify(data)
+        }
+        
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            if(response.message == "login"){
+            window.location = "http://localhost:3000/g_log/"+g_id+""
+            }
+        });
+      }
+    </script>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+</body>    

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  crawled_url: MyString
+  total_crawled_data: 1
+
+two:
+  crawled_url: MyString
+  total_crawled_data: 1

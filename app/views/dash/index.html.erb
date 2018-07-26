@@ -1,0 +1,170 @@
+<meta name="viewport" content="width= device-width initail-scale=1" />
+<body class="dash-body nav-sm" id="dash">
+    <div class="container body">
+        <div class="main_container">
+            <%= render partial: "layouts/left_col", :locals => {active: "Dashboard"} %>
+            <%= render partial: "layouts/nav_bar", :locals => {active: "Dashboard"} %>
+            <div class="right_col" >
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <% flash.each do |name, msg|%>
+                        <center> 
+                        <div class='flash-message alert alert-<%= name %> flash-message-dashbord' id="flash-message-desktop">
+                            <center><p class="flash-message-dash"><%= msg %></p></center>
+                        </div>
+                        </center>
+                    <% end %>
+                    <div class="row">
+                        <center>
+                            <p id="mising-error" class="" style="display:none"></p>
+                        </center>    
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h4  class="title_panel"> Your Total Scrap Url</h4>
+                                    </div>
+                                    <div class="x_content">
+                                        <% if @activity.blank? %>
+                                            <h4 class="totalScrap">0</h4>
+                                        <% else %>    
+                                            <h4 class="totalScrap"><%= @activity_count %></h4>
+                                        <% end %>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h4 class="title_panel">Total Data </h4>
+                                    </div>    
+                                    <div class="x_content">
+                                        <h4 class="totalScrap"><%= @crawled_data %></h4>
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h4 class="ActivityTitle title_panel">Your Activities</h4>
+                            </div>
+                            <div class="x_content">
+                                <div class="activity">
+                                    <%if @activity.blank? %>
+                                       <p class="Nodata_act"> No activity....</p>
+                                    <% else %>
+                                        <% @activity.each do |c| %>
+                                            <div class="row">
+                                                <div class="TimeOfCrawel">
+                                                    <h5 class="activity_time"><%= time_ago_in_words(c.created_at) %> ago</h5>
+                                                </div>   
+                                                <div class="url">
+                                                    <i class="fa fa-rss feed_logo"></i>
+                                                    <p class="" style="margin-left: 33px;">
+                                                        
+                                                        <span style="word-wrap: break-word; "><a class="link_to_product" href="<%= c.crawled_url %>"><%= c.crawled_url.to_s %></a></span>
+                                                    </p>
+                                                </div>
+                                            </div>    
+                                        <% end %> 
+                                    <% end %>    
+                                    <div class="row">
+                                        <center>
+                                            <%= link_to activity_path, class:"seemore" do %>
+                                                See More
+                                            <% end %>
+                                        </center>
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row dash_row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h4 class="title_panel">Scrap Data</h4>
+                                    </div>
+                                    <div class="x_content">
+                                        <div class="row">
+                                            <div class="form_dash">
+                                                <center>
+                                                    <%= form_for @crawel, url: activity_path do |f| %>
+                                                        <fieldset>
+                                                            <div class="row ">
+                                                                <%= f.text_field :crawled_url, class:"urlScrap",id:"urlField", placeholder:"Enter the Url for Scrapping...." %>
+                                                            </div>
+                                                            <div class="row">
+                                                                <%= f.submit "Crawel", class:"SubmitButtonScrapping", id:"submiturl"%>
+                                                            </div>
+                                                        </fieldset>
+                                                    <% end %>
+                                                </center>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="col-md-12 col-xs-12 col-sm-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h4 class="title_panel">Daily Data Crawel</h4>
+                                    </div>
+                                    <div class="x_container">
+                                        <% if @crawel_data_per_day.blank? %>
+                                            <p class="Nodata_act">No data yet !</p>
+                                        <% else %>
+                                            <div class="graph">
+                                                <%= content_tag :div, "", id: "crawel_chart", data: {crawel: crawel_data.uniq} %>
+                                            </div>
+                                        <% end %>    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script>
+     $('#flash-message-desktop').css("display","block");
+     $('#flash-message-desktop').fadeOut(4000);     
+   </script>
+   <script>
+      $('#submiturl').click(function(e){
+            var data = $('#urlField').val();
+            if(data == ""){
+                e.preventDefault();     
+                $('#mising-error').text("Url is missing ... ");
+                $('#mising-error').css("display", "block");
+                $('#mising-error').fadeOut(3000);
+            }
+      })
+      
+
+   </script>
+   <script>
+   new Morris.Line({
+    
+       element: 'crawel_chart',
+    
+       data: $('#crawel_chart').data('crawel'),
+      
+       xkey: 'created_at',
+     
+       ykeys: ['crawel'],
+     
+       labels: ['crawel'],
+       lineColors: ['#03C770'],
+       yLabelMargin: 0
+     });
+        
+   </script>
+</body>  
+ 

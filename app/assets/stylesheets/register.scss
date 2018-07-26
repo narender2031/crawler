@@ -1,0 +1,51 @@
+// Place all the styles related to the register controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.RegisterPage{
+    background: #f4f4f4
+}
+.registerForm{
+    
+        border: 1px solid #60bd6a;
+        background: white;
+        padding: 20px;
+        position: relative;
+        top: 60px;
+        border-radius: 11px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+.registerFields{
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.fieldsetRegister{
+    padding: 50px;
+}
+
+.registerButtonSection{
+    margin-top: 20px;
+}
+.RegisterButton{
+    padding: 6px;
+    width: 63%;
+    border: 1px solid #444;
+    border-radius: 7px;
+}
+.alreadyHaveAccount{
+    position: relative;
+    top: 36px;
+}
+.r-error-message{
+    display: none;
+    position: relative;
+    top: -9px;
+    color: #facdcd;
+    border: 1px solid #ed5a5a;
+    background: #ed5a5a;
+    border-radius: 7px;
+    margin-bottom: -2px;
+
+}

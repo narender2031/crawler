@@ -1,0 +1,79 @@
+// Place all the styles related to the profile controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.profileField{
+    padding: 4px;
+    width: 90%;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #444;
+    margin-bottom: 10px;
+}
+.SubmitProfileUpdates{
+    padding: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 1px solid #60bd6a;
+    background: #60bd6a;
+    color: #fff;
+    width: 50%;
+    border-radius: 6px;
+    position: relative;
+    top: 20px;
+}
+.profileFieldset{
+    padding: 30px;
+}
+.UploadImage{
+    margin-bottom: 10px;
+}
+.imageProfile{
+width: 20%;
+}
+.updatePasswordField{
+    padding: 9px;
+    width: 100%;
+    border: 1px solid #444;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.PasswordSubmit{
+    padding: 5px;
+    width: 38%;
+    border: 1px solid;
+    color: white;
+    background: #60bd6a;
+    border-radius: 4px;
+}
+.PasswordButton{
+    position: relative;
+    top: 21px;
+    background: no-repeat;
+    color: #444;
+    border: 1px solid;
+    padding: 6px;
+    border-radius: 4px;
+}
+.UploadImage{
+    margin-top: 10px;
+}
+.logoutButton{
+    position: relative;
+    top: 30px;
+    border: 1px solid #d9534f;
+    padding: 6px;
+    padding-right: 40px;
+    padding-left: 41px;
+    border-radius: 4px;
+    background: #d9534f;
+    color: #fff;
+}
+.errorMessage{
+    border: 1px solid #ed5a5a;
+    width: 90%;
+    text-align: center;
+    border-radius: 14px;
+    background: #ed5a5a;
+    color: #facdcd;
+    display: none;
+}
